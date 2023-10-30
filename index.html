@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Drawing Board</title>
+</head>
+
+<body>
+    <aside>
+        <div class="selectColorWrapper">
+            <input id="colorPicker" type="color" value="#000000">
+        </div>
+        <div class="rainbowWrapper">
+            <button id="rainbowBtn">RAINBOW</button>
+        </div>
+        <div class="eraserWrapper">
+            <button id="eraserBtn">ERASER</button>
+        </div>
+        <div class="clearWrapper">
+            <button id="clearBtn">CLEAR</button>
+        </div>
+        <div class="showPixelsWrapper">
+            <div id="showPixels">32 x 32</div>
+        </div>
+        <div class="canvasWrapper">
+            <input id="totalPixels" type="range" value="32" min="1" max="64">
+        </div>
+    </aside>
+    <main>
+        <div id="container">
+
+        </div>
+    </main>
+    <script src="./app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+*{
+    padding: 0;
+    margin: 0;
+    background-color: #b3cde0;
+    color: #005b96;
+}
+
+body{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.0vmax;
+    padding: 2.0vmax;
+}
+
+aside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.0vmax;
+}
+
+@media screen and (max-width: 700px) {
+    body{
+        flex-direction: column-reverse;
+    }
+}
+
+#colorPicker{
+    border: none;
+    width: 10.0vmax;
+    height: 10.0vmax;
+
+    &:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+    &:active{
+        transform: scale(1.1);
+    }
+}
+
+input[type="color"]::-webkit-color-swatch{
+    border-radius: 50%;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper{
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: #011f4b 0.05vmax 0 0.3vmax 0;
+}
+
+aside button{
+    padding: 1.0vmax;
+    height: 5.0vmax;
+    width: 10.0vmax;
+    border: none;
+    border-radius: 0.5vmax;
+    font-size: 1.0vmax;
+    cursor: pointer;
+    border: solid 0.15vmax #005b96;
+
+    &:hover{
+        background-color: #005b96;
+        border: solid 0.15vmax #011f4b;
+        color: #b3cde0;
+    }
+
+    &:active{
+        transform: scale(0.8);
+    }
+}
+
+#container{
+    width: 500px;
+    height: 500px;
+    padding: 10px;
+    border: 0.5vmin solid #005b96;
+    border-radius: 0.5vmax;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+
+input[type="range"]{
+    appearance: none;
+    width: 10.0vmax;
+    height: 0.5vmax;
+    background: transparent;
+    outline: none;
+    border-radius: 0.5vmax;
+    margin: 1.0vmax 0;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+    position: relative;
+    appearance: none;
+    width: 1.0vmax;
+    height: 1.0vmax;
+    background: #03396c;
+    border-radius: 50%;
+    cursor: pointer;
+    top: -0.25vmax;
+}
+
+input[type="range"]::-webkit-slider-runnable-track{
+    width: 10.0vmax;
+    height: 0.5vmax;
+    background: #005b96;
+    border-radius: 0.5vmax;
+}
+
+.pixel{
+    background-color: #ffffff;
+}
