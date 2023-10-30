@@ -8,21 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalPixels = document.getElementById("totalPixels");
     const container = document.getElementById("container");
     const pixel = document.getElementsByClassName("pixel");
+    let body = document.getElementsByTagName("body")[0];
 
-    let isDrawing = false;
 
-    const toggleDrawing = (value) => {
-        isDrawing = value;
-    };
-
-    document.body.addEventListener('pointerdown', () => toggleDrawing(true));
-    document.body.addEventListener('pointerup', () => toggleDrawing(false));
-
-    let defaultColor = "#000000";
-    let defaultPixels = 32;
-
-    let color = defaultColor;
-    let pixels = defaultPixels;
+    let color = colorPicker.value;
+    let pixels = totalPixels.value;
     let rainbow = false;
     let eraser = false;
 
@@ -90,14 +80,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateCanvas() {
         Array.from(pixel).forEach(element => {
-            element.addEventListener("pointermove", draw, false);
-            element.addEventListener("pointerdown", draw, false);
+            element.addEventListener("mouseover", draw, false);
         });
     }
 
+    let isDrawing = false;
+    document.body.addEventListener('mousedown', () => {isDrawing = true});
+    document.body.addEventListener('mouseup', () => {isDrawing = false});
+
     function draw(event) {
         event.preventDefault();
-        if (event.type === 'pointermove' && !isDrawing) return;
+        if (event.type === 'mouseover' && !isDrawing) return;
         if (rainbow) {
             let colorR = `${Math.floor(Math.random() * 255)}`;
             let colorG = `${Math.floor(Math.random() * 255)}`;
@@ -116,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < pixels * pixels; i++) {
             let element = document.createElement("div");
             element.classList.add("pixel");
-            element.style.width = `${(500 / pixels)}px`;
-            element.style.height = `${(500 / pixels)}px`;
+            element.style.width = `${(700 / pixels)}px`;
+            element.style.height = `${(700 / pixels)}px`;
             container.appendChild(element);
         }
         updateCanvas();
@@ -125,4 +118,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     createGrid();
     colorBtn.style.backgroundColor = color;
+
+    let sizeOfScreen = window.matchMedia("(max-width: 400px)");
+    if (sizeOfScreen.matches) {
+        body.innerHTML = "";
+        let mobile = document.createElement("div");
+        mobile.classList.add("mobile");
+        mobile.innerHTML = `Please use a desktop or laptop to view this page.`;
+        body.appendChild(mobile);
+    }
+
 });
