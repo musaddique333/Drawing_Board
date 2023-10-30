@@ -91,7 +91,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         Array.from(pixel).forEach(element => {
             element.addEventListener("mousemove", draw, false);
-            element.addEventListener("touchstart touchend", draw, false);
+            // make this avaliable for touching deice
+            element.addEventListener("touchmove", draw, false);
+
         });
     }
 
