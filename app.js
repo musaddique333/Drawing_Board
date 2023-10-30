@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         color = event.target.value;
         colorBtn.style.backgroundColor = color;
         rainbow = false;
+        eraser = false;
         updateCanvas();
     }
 
