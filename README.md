@@ -29,6 +29,8 @@ Throughout the development of the Drawing Board project, I gained valuable knowl
 
 5. **GitHub Collaboration**: I gained experience in collaborating on GitHub, managing issues, and accepting contributions from other developers.
 
+![Drawing Board Screenshot](screenshot1.png)
+
 ## Features ✨
 
 - **Customizable Colors**: Choose your favorite colors from a color palette.
