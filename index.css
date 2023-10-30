@@ -6,6 +6,7 @@
     font-family: 'Barlow Semi Condensed', sans-serif;
     font-family: 'Exo', sans-serif;
     font-weight: bolder;
+    touch-action: none;
 }
 
 header{

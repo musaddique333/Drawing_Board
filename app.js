@@ -3,16 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const rainbowBtn = document.getElementById("rainbowBtn");
     const eraserBtn = document.getElementById("eraserBtn");
     const clearBtn = document.getElementById("clearBtn");
+    const colorBtn = document.getElementById("colorBtn");
     const showPixels = document.getElementById("showPixels");
     const totalPixels = document.getElementById("totalPixels");
     const container = document.getElementById("container");
     const pixel = document.getElementsByClassName("pixel");
 
-    let mouseDown = false
-    document.body.onmousedown = () => {mouseDown = true}
-    document.body.onmouseup = () => {mouseDown = false}
-    document.body.ontouchstart = () => {mouseDown = true}
-    document.body.ontouchend = () => {mouseDown = false}
+    let isDrawing = false;
+
+    const toggleDrawing = (value) => {
+        isDrawing = value;
+    };
+
+    document.body.addEventListener('pointerdown', () => toggleDrawing(true));
+    document.body.addEventListener('pointerup', () => toggleDrawing(false));
 
     let defaultColor = "#000000";
     let defaultPixels = 32;
@@ -24,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     totalPixels.addEventListener("input", updatePixelScreen, false);
     totalPixels.addEventListener("change", updatePixels, false);
-
 
     function updatePixelScreen(event) {
         pixels = event.target.value;
@@ -40,15 +43,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearGrid() {
         container.innerHTML = "";
         createGrid();
-    };
+    }
 
     colorPicker.addEventListener("input", updateColor, false);
-    
+
     function updateColor(event) {
         color = event.target.value;
+        colorBtn.style.backgroundColor = color;
         rainbow = false;
         updateCanvas();
     }
+
+    colorBtn.addEventListener("click", function(event) {
+        updateBtnColor(event);
+        rainbow = false;
+        eraser = false;
+        updateCanvas();
+    });
 
     rainbowBtn.addEventListener("click", function(event) {
         updateBtnColor(event);
@@ -69,45 +80,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function updateBtnColor(event) {
+        colorBtn.style.cssText = `border: solid 0.15vmax #005b96;; color: #005b96;`;
         rainbowBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         eraserBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         clearBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         event.target.style.cssText = "background-color: #005b96; border: solid 0.15vmax #011f4b; color: #b3cde0;";
+        colorBtn.style.backgroundColor = color;
     }
 
     function updateCanvas() {
         Array.from(pixel).forEach(element => {
-            element.addEventListener("mouseover", draw, false);
-            element.addEventListener("mousedown", draw, false);
-            element.addEventListener("touchstart", draw, false);
-            element.addEventListener("touchmove", draw, false);
-            element.addEventListener("touchend", draw, false);
+            element.addEventListener("pointermove", draw, false);
+            element.addEventListener("pointerdown", draw, false);
         });
     }
 
     function draw(event) {
         event.preventDefault();
-        if (event.type === 'mouseover' && !mouseDown) return
-        if(rainbow){
+        if (event.type === 'pointermove' && !isDrawing) return;
+        if (rainbow) {
             let colorR = `${Math.floor(Math.random() * 255)}`;
             let colorG = `${Math.floor(Math.random() * 255)}`;
             let colorB = `${Math.floor(Math.random() * 255)}`;
             let colorA = `1`;
             event.target.style.backgroundColor = `rgba(${colorR}, ${colorG}, ${colorB}, ${colorA})`;
-        }
-        else if(eraser){
+        } else if (eraser) {
             event.target.style.backgroundColor = "#ffffff";
-        }
-        else{
+        } else {
             event.target.style.backgroundColor = color;
-            rainbow = false;
         }
     }
 
-
-    function createGrid(){
+    function createGrid() {
         container.innerHTML = "";
-        for(let i= 0; i < pixels * pixels; i++){
+        for (let i = 0; i < pixels * pixels; i++) {
             let element = document.createElement("div");
             element.classList.add("pixel");
             element.style.width = `${(500 / pixels)}px`;
@@ -118,4 +124,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     createGrid();
+    colorBtn.style.backgroundColor = color;
 });
