@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let mouseDown = false
     document.body.onmousedown = () => {mouseDown = true}
     document.body.onmouseup = () => {mouseDown = false}
+    document.body.ontouchstart = () => {mouseDown = true}
+    document.body.ontouchend = () => {mouseDown = false}
 
     let defaultColor = "#000000";
     let defaultPixels = 32;
@@ -63,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     clearBtn.addEventListener("click", function(event) {
-        updateBtnColor(event);
         clearGrid();
     });
 
@@ -78,11 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
         Array.from(pixel).forEach(element => {
             element.addEventListener("mouseover", draw, false);
             element.addEventListener("mousedown", draw, false);
-
+            element.addEventListener("touchstart", draw, false);
+            element.addEventListener("touchmove", draw, false);
+            element.addEventListener("touchend", draw, false);
         });
     }
 
     function draw(event) {
+        event.preventDefault();
         if (event.type === 'mouseover' && !mouseDown) return
         if(rainbow){
             let colorR = `${Math.floor(Math.random() * 255)}`;

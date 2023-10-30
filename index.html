@@ -5,35 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500&family=Dancing+Script:wght@600&family=Exo:wght@300&family=Ubuntu&display=swap" rel="stylesheet">
     <title>Drawing Board</title>
 </head>
 
 <body>
-    <aside>
-        <div class="selectColorWrapper">
-            <input id="colorPicker" type="color" value="#000000">
-        </div>
-        <div class="rainbowWrapper">
-            <button id="rainbowBtn">RAINBOW</button>
-        </div>
-        <div class="eraserWrapper">
-            <button id="eraserBtn">ERASER</button>
-        </div>
-        <div class="clearWrapper">
-            <button id="clearBtn">CLEAR</button>
-        </div>
-        <div class="showPixelsWrapper">
-            <div id="showPixels">32 x 32</div>
-        </div>
-        <div class="canvasWrapper">
-            <input id="totalPixels" type="range" value="32" min="1" max="64">
-        </div>
-    </aside>
-    <main>
-        <div id="container">
-
-        </div>
-    </main>
+    <header>
+        <h1>ETCH - A - SKETCH</h1>
+    </header>
+    <div class="body">
+        <aside>
+            <div class="selectColorWrapper">
+                <input id="colorPicker" type="color" value="#000000">
+            </div>
+            <div class="rainbowWrapper">
+                <button id="rainbowBtn">RAINBOW</button>
+            </div>
+            <div class="eraserWrapper">
+                <button id="eraserBtn">ERASER</button>
+            </div>
+            <div class="clearWrapper">
+                <button id="clearBtn">CLEAR</button>
+            </div>
+            <div class="showPixelsWrapper">
+                <div id="showPixels">32 x 32</div>
+            </div>
+            <div class="canvasWrapper">
+                <input id="totalPixels" type="range" value="32" min="1" max="64">
+            </div>
+        </aside>
+        <main>
+            <div id="container">
+            </div>
+        </main>
+    </div>
     <script src="./app.js"></script>
 </body>
 
