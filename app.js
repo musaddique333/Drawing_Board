@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById("container");
     const pixel = document.getElementsByClassName("pixel");
 
+    let mouseDown = false
+    document.body.onmousedown = () => {mouseDown = true}
+    document.body.onmouseup = () => {mouseDown = false}
+
     let defaultColor = "#000000";
     let defaultPixels = 32;
 
@@ -64,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function updateBtnColor(event) {
-
         rainbowBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         eraserBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         clearBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
@@ -72,29 +75,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateCanvas() {
-        function draw(event) {
-            if(rainbow){
-                let colorR = `${Math.floor(Math.random() * 255)}`;
-                let colorG = `${Math.floor(Math.random() * 255)}`;
-                let colorB = `${Math.floor(Math.random() * 255)}`;
-                let colorA = `1`;
-                event.target.style.backgroundColor = `rgba(${colorR}, ${colorG}, ${colorB}, ${colorA})`;
-                console.log("i am in rainbow");
-            }
-            else if(eraser){
-                event.target.style.backgroundColor = "#ffffff";
-            }
-            else{
-                event.target.style.backgroundColor = color;
-                rainbow = false;
-            }
-        }
         Array.from(pixel).forEach(element => {
-            element.addEventListener("mousemove", draw, false);
-            // make this avaliable for touching deice
-            element.addEventListener("touchmove", draw, false);
+            element.addEventListener("mouseover", draw, false);
+            element.addEventListener("mousedown", draw, false);
 
         });
+    }
+
+    function draw(event) {
+        if (event.type === 'mouseover' && !mouseDown) return
+        if(rainbow){
+            let colorR = `${Math.floor(Math.random() * 255)}`;
+            let colorG = `${Math.floor(Math.random() * 255)}`;
+            let colorB = `${Math.floor(Math.random() * 255)}`;
+            let colorA = `1`;
+            event.target.style.backgroundColor = `rgba(${colorR}, ${colorG}, ${colorB}, ${colorA})`;
+        }
+        else if(eraser){
+            event.target.style.backgroundColor = "#ffffff";
+        }
+        else{
+            event.target.style.backgroundColor = color;
+            rainbow = false;
+        }
     }
 
 
