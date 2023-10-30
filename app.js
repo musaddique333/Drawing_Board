@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         colorBtn.style.backgroundColor = color;
         rainbow = false;
         eraser = false;
+        updateBtnColor(event)
         updateCanvas();
     }
 
@@ -75,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
         rainbowBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         eraserBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
         clearBtn.style.cssText = "background-color: #b3cde0; border: solid 0.15vmax #005b96;; color: #005b96;";
-        event.target.style.cssText = "background-color: #005b96; border: solid 0.15vmax #011f4b; color: #b3cde0;";
+        if(event.target.id !== "colorPicker"){
+            event.target.style.cssText = "background-color: #005b96; border: solid 0.15vmax #011f4b; color: #b3cde0;";
+        }
         colorBtn.style.backgroundColor = color;
     }
 
