@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         Array.from(pixel).forEach(element => {
-            element.addEventListener("mouseover", draw, false);
-            element.addEventListener("touchmove", draw, false);
+            element.addEventListener("mousemove", draw, false);
+            element.addEventListener("touchstart touchend", draw, false);
         });
     }
 
